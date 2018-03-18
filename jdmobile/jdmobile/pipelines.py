@@ -8,4 +8,7 @@
 
 class JdmobilePipeline(object):
     def process_item(self, item, spider):
+        for i in range(0, len(item['title'])):
+            title = item['title']
+            print(title)
         return item

@@ -7,13 +7,14 @@ class jdmobile(scrapy.Spider):
     name = "jdmobile"
     allowed_domains = ["baidu.com"]
     start_urls = (
-        "https://www.jd.com/",
+        "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&pvid=aab0d688328c46a484a4aa6f32372ee1",
     )
 
     def parse(self, response):
         item = JdmobileItem()
         # 提取手机,xpath表达式
-        item['title'] = response.xpath("//div[@class='p-name-type-2']/a/@title").extract()
+        item['title'] = response.xpath('//div[@class="p-img"]/a/@title').extract()
+        print(1)
         print(item['title'])
         yield item
 

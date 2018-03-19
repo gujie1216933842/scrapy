@@ -14,7 +14,6 @@ class jdmobile(scrapy.Spider):
         item = JdmobileItem()
         # 提取手机,xpath表达式
         item['title'] = response.xpath('//div[@class="p-img"]/a/@title').extract()
-        print(1)
         print(item['title'])
         yield item
 

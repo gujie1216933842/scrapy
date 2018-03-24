@@ -16,16 +16,16 @@ class JdmobilePipeline(object):
         for i in range(0, len(item['title'])):
             title = item['title'][i]
             price = item['price'][i]
-            price = price[1:]
+            price = float(price[1:])
 
             comment_count = item['comment_count'][i]
-            comment_count = comment_count[:-3]
+            comment_count = int(comment_count[:-3])
             author = item['author'][i]
             publicing_company = item['publicing_company'][i]
             title = re.sub('\'', '', title)
             title = re.sub('\"', '', title)
-            sql = " insert into dd_it_book (name,price,comment_count, author,publicing_company) VALUES ( %s ,now())"
-            cursor.execute(sql, title, price, comment_count, author, publicing_company)
+            sql = " insert into dd_it_book (name,price,comment_count, author,publicing_company,raw_add_time) VALUES ( %s ,%s,%s,%s,%s,now())"
+            cursor.execute(sql, (title, price, comment_count, author, publicing_company))
             conn.commit()
         cursor.close()
         conn.close()

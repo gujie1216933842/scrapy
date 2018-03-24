@@ -11,4 +11,8 @@ import scrapy
 class JdmobileItem(scrapy.Item):
     # define the fields for your item here like:
     title = scrapy.Field()
+    price = scrapy.Field()
+    comment_count = scrapy.Field()
+    author = scrapy.Field()
+    publicing_company = scrapy.Field()
     #pass

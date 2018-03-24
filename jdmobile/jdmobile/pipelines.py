@@ -24,10 +24,9 @@ class JdmobilePipeline(object):
             publicing_company = item['publicing_company'][i]
             title = re.sub('\'', '', title)
             title = re.sub('\"', '', title)
-            sql = " insert into jd_mobile (name,raw_add_time ) VALUES ( %s ,now())"
-            cursor.execute(sql, title)
+            sql = " insert into dd_it_book (name,price,comment_count, author,publicing_company) VALUES ( %s ,now())"
+            cursor.execute(sql, title, price, comment_count, author, publicing_company)
             conn.commit()
         cursor.close()
         conn.close()
         return item
-

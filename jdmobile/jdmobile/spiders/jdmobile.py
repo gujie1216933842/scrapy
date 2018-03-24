@@ -3,20 +3,22 @@ import scrapy
 from jdmobile.items import JdmobileItem
 from scrapy.http import Request
 
+
 class jdmobile(scrapy.Spider):
     name = "jdmobile"
-    allowed_domains = ["baidu.com"]
+    allowed_domains = ["dangdang.com"]
     start_urls = (
-        "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&pvid=aab0d688328c46a484a4aa6f32372ee1",
+        "http://book.dangdang.com/",
     )
 
     def parse(self, response):
         item = JdmobileItem()
         # 提取手机,xpath表达式
-        item['title'] = response.xpath('//div[@class="p-img"]/a/@title').extract()
+        item['title'] = response.xpath('//a[@name="itemlist-picture"]/@title').extract()
         yield item
 
-        for i in range(1, 100):    #range的范围
-            url = "https://search.jd.com/Search?keyword=%E6%89%8B%E6%9C%BA&enc=utf-8&qrst=1&rt=1" \
-                  "&stop=1&vt=2&cid2=653&cid3=655&page=" + str(2 * i + 1) + "&s=&click=0"
-            yield Request(url,callback=self.parse)
+        for i in range(1, 100):  # range的范围
+            url = "http://search.dangdang.com/?key=it&act=input&category_path=01.00.00.00.00.00&type=01.00.00.00.00.00&page_index=" + str(
+                i) + "#J_tab"
+            #print(url)
+            yield Request(url, callback=self.parse)

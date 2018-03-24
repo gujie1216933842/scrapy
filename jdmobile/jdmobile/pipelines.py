@@ -21,6 +21,7 @@ class JdmobilePipeline(object):
             title = re.sub('\"','',title)
             sql = " insert into jd_mobile (name,raw_add_time ) VALUES ( %s ,now())"
             cursor.execute(sql,title)
+            conn.commit()
         cursor.close()
         conn.close()
         return item
